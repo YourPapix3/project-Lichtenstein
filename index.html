@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My girl.. 🌙</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    background: linear-gradient(135deg, #0f2a1d, #3b0a14); /* dark green → deep red */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif;
+    color: #ff4d6d; /* cherry red text */
+}
+
+/* Container */
+.container {
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(18px);
+    padding: 50px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 520px;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.6);
+    position: relative;
+    border: 1px solid rgba(255,255,255,0.08);
+    animation: fadeIn 1.5s ease forwards;
+}
+@keyframes fadeIn { from {opacity:0; transform:translateY(15px);} to {opacity:1; transform:translateY(0);} }
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    opacity: 0.95;
+}
+
+.question {
+    margin-top: 25px;
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+/* Buttons */
+.btn {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin: 15px;
+    transition: all 0.6s ease;
+}
+
+.yes {
+    background: #a4162c;
+    color: white;
+}
+.yes:hover { background: #d62839; transform: scale(1.08); }
+
+.no {
+    background: #123524;
+    color: white;
+    position: absolute;
+}
+
+/* Celebration */
+.hidden { display: none; }
+.celebration {
+    font-size: 1.6rem;
+    animation: glow 2s infinite alternate;
+}
+@keyframes glow { from { text-shadow: 0 0 8px #ff4d6d; } to { text-shadow: 0 0 20px gold; } }
+
+/* Crescent moon & star */
+.moon {
+    position: fixed;
+    font-size: 85px;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: moonGlow 3s infinite alternate;
+}
+@keyframes moonGlow { from { text-shadow: 0 0 10px #ff4d6d; } to { text-shadow: 0 0 30px gold; } }
+
+/* Gold sparkles */
+.sparkle {
+    position: fixed;
+    color: gold;
+    font-size: 14px;
+    animation: float 6s linear infinite;
+}
+@keyframes float { 0% { transform: translateY(100vh); opacity:0; } 50% { opacity:1; } 100% { transform: translateY(-10vh); opacity:0; } }
+
+</style>
+</head>
+<body>
+
+<!-- Background music (rename your romantic instrumental to love.mp3) -->
+<audio id="bgMusic" src="love.mp3" loop></audio>
+
+<div class="container" id="mainContent">
+    <h1>Hey bebeğim</h1>
+    <p>Zaten beni çok mutlu ediyorsun.</p>
+    <p>ama bu beni daha da mutlu edecek</p>
+
+    <div class="question">Benim Sevgililer Günü aşkım olur musun? 🌹</div>
+
+    <button class="btn yes" onclick="sayYes()">Evet 💖</button>
+    <button class="btn no" id="noBtn">Hayır 🙈</button>
+</div>
+
+<div class="container hidden" id="celebrationContent">
+    <div class="celebration">
+        Teşekkür ederim bebeğim.. <br><br>
+        Görmeyi sabırsızlıkla bekliyorum 💘<br>
+        Mwahhh. 🤍
+    </div>
+</div>
+
+<script>
+const noBtn = document.getElementById("noBtn");
+const music = document.getElementById("bgMusic");
+
+// Start music on first click
+document.body.addEventListener("click", function(){ music.play(); }, {once:true});
+
+// Smooth escape for "No" button
+noBtn.addEventListener("mouseover", function(){
+    const x = Math.random() * (window.innerWidth - 160);
+    const y = Math.random() * (window.innerHeight - 100);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+});
+
+function sayYes(){
+    document.getElementById("mainContent").classList.add("hidden");
+    document.getElementById("celebrationContent").classList.remove("hidden");
+    createTurkishEffect();
+}
+
+// Turkish cultural ending effect
+function createTurkishEffect(){
+    let moon = document.createElement("div");
+    moon.className = "moon";
+    moon.innerHTML = "🪷💘";
+    document.body.appendChild(moon);
+
+    for(let i=0; i<60; i++){
+        let sparkle = document.createElement("div");
+        sparkle.className = "sparkle";
+        sparkle.innerHTML = "✦";
+        sparkle.style.left = Math.random() * 100 + "vw";
+        sparkle.style.animationDuration = (Math.random()*3 + 3) + "s";
+        document.body.appendChild(sparkle);
+    }
+}
+</script>
+
+</body>
+</html>
